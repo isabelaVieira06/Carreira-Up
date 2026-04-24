@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teste Vocacional — Carreira Up</title>
+<meta name="description" content="Carreira Up — Evoluindo a cada passo. Plataforma de orientação vocacional e profissional para jovens.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --azul:#0a3d91;--azul-claro:#2a6fdb;--azul-bg:#eaf2ff;
+  --laranja:#ff7a1a;--laranja-escuro:#e85d00;
+  --branco:#ffffff;--cinza:#f6f8fb;--texto:#1d2433;--muted:#5a6478;
+  --sombra:0 6px 24px rgba(10,61,145,.08);
+  --radius:14px;
+}
+html,body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--texto);background:var(--branco);line-height:1.55;scroll-behavior:smooth}
+a{color:var(--azul);text-decoration:none}
+a:hover{color:var(--laranja)}
+img{max-width:100%;display:block}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* Header */
+header.site{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5ebf5;box-shadow:0 2px 10px rgba(10,61,145,.04)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--azul);font-size:1.25rem}
+.brand .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--azul),var(--azul-claro));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;letter-spacing:.5px;box-shadow:var(--sombra)}
+.brand .logo span{font-size:1rem}
+.brand small{display:block;font-weight:500;color:var(--laranja);font-size:.78rem;letter-spacing:.5px}
+.menu-btn{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:10px;border-radius:10px}
+.menu-btn:hover{background:var(--azul-bg)}
+.menu-btn span{width:26px;height:3px;background:var(--azul);border-radius:2px;display:block;transition:.25s}
+.menu-btn.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* Drawer */
+.drawer{position:fixed;top:0;right:-360px;width:340px;max-width:90vw;height:100vh;background:#fff;box-shadow:-12px 0 30px rgba(10,61,145,.15);transition:right .3s ease;z-index:60;padding:90px 22px 30px;overflow-y:auto}
+.drawer.open{right:0}
+.drawer h3{color:var(--azul);font-size:.9rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;border-bottom:2px solid var(--laranja);padding-bottom:6px;display:inline-block}
+.drawer ul{list-style:none;margin-top:14px}
+.drawer li a{display:block;padding:14px 12px;border-radius:10px;color:var(--texto);font-weight:600;border-left:3px solid transparent;transition:.2s}
+.drawer li a:hover{background:var(--azul-bg);border-left-color:var(--laranja);color:var(--azul);transform:translateX(3px)}
+.overlay{position:fixed;inset:0;background:rgba(10,30,60,.45);opacity:0;pointer-events:none;transition:.3s;z-index:55}
+.overlay.show{opacity:1;pointer-events:auto}
+
+/* Hero */
+.hero{position:relative;background:linear-gradient(135deg,#0a3d91 0%,#2a6fdb 100%);color:#fff;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-100px;top:-80px;width:380px;height:380px;background:var(--laranja);opacity:.18;border-radius:50%}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:70px 0;position:relative;z-index:2}
+.hero h1{font-size:2.8rem;line-height:1.15;margin-bottom:18px;font-weight:800}
+.hero h1 em{font-style:normal;color:#ffd9b8;background:linear-gradient(transparent 60%,rgba(255,122,26,.55) 60%);padding:0 6px}
+.hero p.lead{font-size:1.15rem;opacity:.95;margin-bottom:28px;max-width:540px}
+.hero .img-wrap{border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);transform:rotate(2deg)}
+.hero .img-wrap img{aspect-ratio:4/3;object-fit:cover}
+.btn{display:inline-block;padding:14px 28px;border-radius:50px;font-weight:700;letter-spacing:.3px;border:0;cursor:pointer;transition:.25s;font-size:1rem}
+.btn-primary{background:var(--laranja);color:#fff;box-shadow:0 8px 22px rgba(255,122,26,.4)}
+.btn-primary:hover{background:var(--laranja-escuro);transform:translateY(-2px);color:#fff}
+.btn-outline{background:transparent;color:#fff;border:2px solid #fff;margin-left:10px}
+.btn-outline:hover{background:#fff;color:var(--azul)}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-azul:hover{background:var(--azul-claro);color:#fff}
+
+/* Sections */
+section.bloco{padding:70px 0}
+.section-title{text-align:center;margin-bottom:42px}
+.section-title small{color:var(--laranja);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.85rem}
+.section-title h2{font-size:2.1rem;color:var(--azul);margin-top:6px}
+.section-title p{color:var(--muted);max-width:680px;margin:14px auto 0}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra);border:1px solid #eef2f9;transition:.3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(10,61,145,.15)}
+.card .ph{height:170px;overflow:hidden;position:relative}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.card:hover .ph img{transform:scale(1.07)}
+.card .body{padding:22px;flex:1;display:flex;flex-direction:column}
+.card h3{color:var(--azul);font-size:1.2rem;margin-bottom:8px}
+.card p{color:var(--muted);flex:1;margin-bottom:16px}
+.card .tag{display:inline-block;background:var(--azul-bg);color:var(--azul);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+
+/* Sobre */
+.sobre{background:var(--cinza)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.sobre img{border-radius:var(--radius);box-shadow:var(--sombra)}
+.sobre h2{color:var(--azul);font-size:2rem;margin-bottom:18px}
+.sobre p{color:var(--muted);margin-bottom:14px;font-size:1.05rem}
+
+/* Footer / contato */
+footer{background:#071f4d;color:#cfd9ee;padding:60px 0 24px;margin-top:0}
+footer h4{color:#fff;margin-bottom:16px;font-size:1.1rem;border-left:4px solid var(--laranja);padding-left:10px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer a{color:#cfd9ee}
+footer a:hover{color:var(--laranja)}
+.copy{border-top:1px solid #1c3a73;margin-top:36px;padding-top:18px;text-align:center;color:#8aa1cb;font-size:.9rem}
+.contact-item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.contact-icon{width:34px;height:34px;border-radius:50%;background:var(--laranja);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;flex-shrink:0}
+
+/* Page header (interno) */
+.page-hero{background:linear-gradient(135deg,#0a3d91,#2a6fdb);color:#fff;padding:60px 0;text-align:center}
+.page-hero h1{font-size:2.4rem;margin-bottom:10px}
+.page-hero p{opacity:.9;max-width:620px;margin:0 auto}
+.breadcrumb{padding:14px 0;background:var(--cinza);font-size:.9rem;color:var(--muted)}
+.breadcrumb a{color:var(--azul);font-weight:600}
+
+/* Conteúdo geral */
+.content{padding:60px 0}
+.content h2{color:var(--azul);margin:30px 0 14px;font-size:1.6rem}
+.content h3{color:var(--azul);margin:22px 0 10px;font-size:1.2rem}
+.content p,.content li{color:var(--texto);margin-bottom:10px}
+.content ul,.content ol{padding-left:22px;margin-bottom:14px}
+.box{background:var(--cinza);border-left:5px solid var(--laranja);padding:22px;border-radius:10px;margin:20px 0}
+.box-azul{background:var(--azul-bg);border-left-color:var(--azul)}
+
+/* Formulário */
+form.form{background:#fff;padding:30px;border-radius:var(--radius);box-shadow:var(--sombra);max-width:680px;margin:0 auto}
+.form-row{margin-bottom:18px}
+.form-row label{display:block;font-weight:600;color:var(--azul);margin-bottom:6px}
+.form-row input,.form-row textarea,.form-row select{width:100%;padding:12px 14px;border:2px solid #dde5f3;border-radius:10px;font-size:1rem;font-family:inherit;transition:.2s}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:0;border-color:var(--azul-claro);box-shadow:0 0 0 3px rgba(42,111,219,.15)}
+.form-row textarea{min-height:130px;resize:vertical}
+.stars{display:flex;gap:6px;font-size:2rem;cursor:pointer;color:#dde5f3}
+.stars span{transition:.2s}
+.stars span.on,.stars span:hover,.stars span:hover ~ span{} /* default left-to-right */
+.stars[data-mode="hover"] span{color:#dde5f3}
+
+/* Responsive */
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr;padding:50px 0}
+  .hero h1{font-size:2.1rem}
+  .sobre-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .page-hero h1{font-size:1.8rem}
+}
+
+/* Teste vocacional */
+.teste-wrap{max-width:780px;margin:0 auto}
+.progress{height:10px;background:#dde5f3;border-radius:20px;overflow:hidden;margin-bottom:24px}
+.progress .bar{height:100%;background:linear-gradient(90deg,var(--azul),var(--laranja));width:0;transition:.4s}
+.questao{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--sombra);border:1px solid #eef2f9}
+.questao h3{color:var(--azul);margin-bottom:6px;font-size:1.05rem;font-weight:600}
+.questao .pergunta{font-size:1.3rem;font-weight:700;color:var(--texto);margin:8px 0 22px}
+.opcoes{display:flex;flex-direction:column;gap:10px}
+.opcao{padding:14px 18px;border:2px solid #dde5f3;border-radius:12px;cursor:pointer;font-weight:500;transition:.2s;background:#fff}
+.opcao:hover{border-color:var(--azul-claro);background:var(--azul-bg);transform:translateX(4px)}
+.opcao.sel{border-color:var(--laranja);background:#fff5ec;color:var(--laranja-escuro);font-weight:700}
+.nav-teste{display:flex;justify-content:space-between;margin-top:20px}
+.nav-teste button{padding:12px 26px;border-radius:50px;border:0;cursor:pointer;font-weight:700}
+.btn-prev{background:#eef2f9;color:var(--azul)}
+.btn-next{background:var(--laranja);color:#fff}
+.btn-next:disabled{opacity:.4;cursor:not-allowed}
+.resultado{background:#fff;border-radius:var(--radius);padding:36px;box-shadow:var(--sombra);text-align:center}
+.resultado .destaque{display:inline-block;background:var(--laranja);color:#fff;padding:8px 22px;border-radius:50px;font-weight:700;margin-bottom:14px;letter-spacing:1px;text-transform:uppercase;font-size:.85rem}
+.resultado h2{color:var(--azul);font-size:2rem;margin-bottom:14px}
+.barras{margin:30px 0;text-align:left}
+.barra-item{margin-bottom:14px}
+.barra-item .lbl{display:flex;justify-content:space-between;font-weight:600;margin-bottom:4px;color:var(--texto)}
+.barra-item .bg{height:14px;background:#eef2f9;border-radius:20px;overflow:hidden}
+.barra-item .fill{height:100%;background:linear-gradient(90deg,var(--azul-claro),var(--laranja));border-radius:20px;transition:1s}
+
+/* Currículo */
+.cv-preview{background:#fff;padding:40px;border-radius:var(--radius);box-shadow:var(--sombra);margin-top:20px;font-family:Georgia,serif}
+.cv-preview h1{color:var(--azul);border-bottom:3px solid var(--laranja);padding-bottom:8px;margin-bottom:6px}
+.cv-preview h2{color:var(--azul);font-size:1.1rem;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #dde5f3;padding-bottom:4px;margin:22px 0 10px}
+.cv-meta{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+
+/* Util */
+.center{text-align:center}
+.mt-20{margin-top:20px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav">
+    <a href="index.html" class="brand">
+      <div class="logo"><span>CU</span></div>
+      <div>Carreira Up<small>Evoluindo a cada passo</small></div>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <h3>Navegação</h3>
+  <ul><li><a href="index.html">Início</a></li>
+<li><a href="teste-vocacional.html" style="color:var(--laranja)">Teste Vocacional</a></li>
+<li><a href="guia-carreira.html">Guia de Carreira</a></li>
+<li><a href="oportunidades-emprego.html">Oportunidades de Emprego</a></li>
+<li><a href="modelo-curriculo.html">Modelo de Currículo</a></li>
+<li><a href="carreira-militar.html">Ingresso Carreira Militar</a></li>
+<li><a href="guia-profissional.html">Guia Profissional</a></li>
+<li><a href="feedback.html">Feedback / Avaliação</a></li>
+<li><a href="contatos.html">Contatos</a></li></ul>
+</aside>
+<script>
+(function(){
+  var b=document.getElementById('menuBtn'),d=document.getElementById('drawer'),o=document.getElementById('overlay');
+  function tog(){b.classList.toggle('open');d.classList.toggle('open');o.classList.toggle('show');}
+  b.addEventListener('click',tog);o.addEventListener('click',tog);
+})();
+</script>
+
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Teste Vocacional Carreira Up</h1>
+    <p>Responda 24 perguntas rápidas e descubra qual área profissional mais combina com seu perfil.</p>
+  </div>
+</section>
+<div class="breadcrumb"><div class="container"><a href="index.html">Início</a> &raquo; Teste Vocacional</div></div>
+
+<section class="content">
+  <div class="container teste-wrap">
+    <div id="intro">
+      <div class="box box-azul">
+        <h2 style="margin-top:0">Como funciona</h2>
+        <p>O teste leva cerca de 5 a 8 minutos. São 24 perguntas com 4 alternativas cada. Não existe resposta certa ou errada — escolha a opção que mais se aproxima do seu perfil.</p>
+        <p>Ao final você verá sua área vocacional principal e será direcionado para os recursos do Carreira Up que combinam com você.</p>
+      </div>
+      <div class="center mt-20">
+        <button class="btn btn-primary" onclick="iniciarTeste()">Começar agora</button>
+      </div>
+    </div>
+
+    <div id="teste" style="display:none">
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="questao" id="questao"></div>
+      <div class="nav-teste">
+        <button class="btn-prev" onclick="anterior()" id="btnPrev">Anterior</button>
+        <button class="btn-next" onclick="proxima()" id="btnNext" disabled>Próxima</button>
+      </div>
+    </div>
+
+    <div id="resultado" style="display:none"></div>
+  </div>
+</section>
+
+<script>
+const PERGUNTAS = [{"q": "Em um trabalho em grupo, qual seu papel preferido?", "ops": [["Liderar e organizar a equipe", ["negocios", "militar"]], ["Pesquisar e analisar os dados", ["exatas", "tecnologia"]], ["Apresentar e comunicar ideias", ["humanas", "social"]], ["Criar a parte visual ou criativa", ["artes", "humanas"]]]}, {"q": "Qual disciplina você mais gosta?", "ops": [["Matemática e Física", ["exatas", "tecnologia"]], ["Biologia e Química", ["biologicas"]], ["História e Filosofia", ["humanas", "social"]], ["Educação Física", ["militar", "biologicas"]]]}, {"q": "Qual atividade te empolga mais?", "ops": [["Programar um aplicativo", ["tecnologia", "exatas"]], ["Cuidar de pessoas e animais", ["biologicas", "social"]], ["Escrever uma redação ou poesia", ["humanas", "artes"]], ["Treinar e praticar esportes", ["militar", "biologicas"]]]}, {"q": "Você se considera uma pessoa:", "ops": [["Lógica e analítica", ["exatas", "tecnologia"]], ["Empática e comunicativa", ["social", "humanas"]], ["Disciplinada e estratégica", ["militar", "negocios"]], ["Criativa e sensível", ["artes", "humanas"]]]}, {"q": "Qual ambiente de trabalho prefere?", "ops": [["Escritório com computadores", ["tecnologia", "negocios"]], ["Hospital, clínica ou laboratório", ["biologicas"]], ["Ar livre, com ação e movimento", ["militar", "biologicas"]], ["Estúdio, redação ou ateliê", ["artes", "humanas"]]]}, {"q": "Sobre dinheiro e negócios você:", "ops": [["Adora planejar gastos e investimentos", ["negocios", "exatas"]], ["Pensa em criar seu próprio negócio", ["negocios", "tecnologia"]], ["Prefere ajudar quem precisa", ["social", "humanas"]], ["Não é sua maior prioridade", ["artes", "biologicas"]]]}, {"q": "Em situações de pressão, você:", "ops": [["Mantém a calma e segue o protocolo", ["militar", "biologicas"]], ["Busca dados para tomar decisão", ["exatas", "tecnologia"]], ["Conversa com a equipe para resolver", ["social", "negocios"]], ["Cria uma solução fora da caixa", ["artes", "tecnologia"]]]}, {"q": "Qual filme/série você assistiria?", "ops": [["Ficção científica e tecnologia", ["tecnologia", "exatas"]], ["Documentário de natureza/medicina", ["biologicas"]], ["Drama histórico ou político", ["humanas", "social"]], ["Filme de ação militar", ["militar"]]]}, {"q": "Como você aprende melhor?", "ops": [["Resolvendo problemas e exercícios", ["exatas", "tecnologia"]], ["Observando e experimentando", ["biologicas", "artes"]], ["Lendo e debatendo ideias", ["humanas", "social"]], ["Praticando fisicamente", ["militar", "biologicas"]]]}, {"q": "Sobre regras e disciplina:", "ops": [["Adora ordem, hierarquia e regras claras", ["militar", "negocios"]], ["Gosta de regras, mas quer entender o porquê", ["exatas", "biologicas"]], ["Prefere flexibilidade para criar", ["artes", "humanas"]], ["Cumpre por respeito ao próximo", ["social", "humanas"]]]}, {"q": "Qual habilidade você gostaria de dominar?", "ops": [["Programação e inteligência artificial", ["tecnologia"]], ["Cirurgia ou enfermagem", ["biologicas"]], ["Oratória e escrita", ["humanas", "social"]], ["Combate, tática ou pilotagem", ["militar"]]]}, {"q": "Quando você ajuda alguém, prefere:", "ops": [["Resolver um problema técnico", ["tecnologia", "exatas"]], ["Cuidar da saúde física dela", ["biologicas"]], ["Ouvir e aconselhar emocionalmente", ["social", "humanas"]], ["Defendê-la em uma situação difícil", ["militar", "social"]]]}, {"q": "O que você faz no tempo livre?", "ops": [["Mexe no celular, joga ou programa", ["tecnologia"]], ["Pratica esportes ou atividades ao ar livre", ["militar", "biologicas"]], ["Lê, escreve ou desenha", ["humanas", "artes"]], ["Conversa com amigos e família", ["social", "negocios"]]]}, {"q": "Qual destas frases combina mais com você?", "ops": [["Quero transformar o mundo com tecnologia", ["tecnologia"]], ["Quero salvar e cuidar de vidas", ["biologicas", "social"]], ["Quero servir e proteger meu país", ["militar"]], ["Quero inspirar pessoas com arte e ideias", ["artes", "humanas"]]]}, {"q": "Você prefere uma carreira:", "ops": [["Estável, com plano de cargos definido", ["militar", "negocios"]], ["Dinâmica, com inovação constante", ["tecnologia", "artes"]], ["Que ajude a sociedade diretamente", ["social", "biologicas"]], ["Com reconhecimento intelectual", ["humanas", "exatas"]]]}, {"q": "Sobre números e cálculos:", "ops": [["Adoro, são meu forte", ["exatas", "tecnologia"]], ["Gosto, mas prefiro aplicados à saúde", ["biologicas"]], ["Uso para administrar e investir", ["negocios"]], ["Não são minha prioridade", ["humanas", "artes"]]]}, {"q": "Em uma viagem você é o tipo que:", "ops": [["Planeja roteiro, gastos e tempo", ["negocios", "exatas"]], ["Quer conhecer culturas e histórias", ["humanas", "social"]], ["Faz trilha e atividades físicas", ["militar", "biologicas"]], ["Fotografa e documenta tudo", ["artes", "tecnologia"]]]}, {"q": "Como você se vê em 10 anos?", "ops": [["Empreendedor de sucesso", ["negocios", "tecnologia"]], ["Profissional da saúde respeitado", ["biologicas"]], ["Oficial militar ou servidor público", ["militar"]], ["Artista, professor ou comunicador", ["artes", "humanas"]]]}, {"q": "Qual problema você gostaria de resolver?", "ops": [["Bugs em sistemas e automatizar processos", ["tecnologia", "exatas"]], ["Doenças e questões de saúde pública", ["biologicas", "social"]], ["Insegurança e injustiça", ["militar", "social"]], ["Falta de cultura e educação", ["humanas", "artes"]]]}, {"q": "Você se sente mais realizado quando:", "ops": [["Cria algo novo do zero", ["artes", "tecnologia"]], ["Cumpre uma missão difícil", ["militar", "negocios"]], ["Vê alguém melhorar com sua ajuda", ["social", "biologicas"]], ["Descobre uma nova ideia ou teoria", ["humanas", "exatas"]]]}, {"q": "Como lida com mudanças?", "ops": [["Adoro, quanto mais novo melhor", ["tecnologia", "artes"]], ["Adapto-me com método e estudo", ["exatas", "biologicas"]], ["Prefiro estabilidade e previsibilidade", ["militar", "negocios"]], ["Encaro com diálogo e empatia", ["social", "humanas"]]]}, {"q": "Qual destas profissões te atrai mais?", "ops": [["Engenheiro, programador, analista", ["tecnologia", "exatas"]], ["Médico, enfermeiro, biólogo", ["biologicas"]], ["Advogado, professor, jornalista", ["humanas", "social"]], ["Militar, policial, bombeiro", ["militar"]]]}, {"q": "O que mais valoriza no trabalho?", "ops": [["Bom salário e crescimento", ["negocios", "tecnologia"]], ["Propósito e impacto social", ["social", "humanas"]], ["Honra, dever e disciplina", ["militar"]], ["Liberdade criativa", ["artes"]]]}, {"q": "Para finalizar: qual seu sonho?", "ops": [["Inovar e empreender", ["negocios", "tecnologia"]], ["Cuidar de vidas e do planeta", ["biologicas", "social"]], ["Servir ao país com honra", ["militar"]], ["Expressar ideias e emocionar pessoas", ["artes", "humanas"]]]}];
+const AREAS = {
+  tecnologia:{nome:"Tecnologia da Informação",cor:"#2a6fdb",desc:"Você tem perfil para áreas como desenvolvimento de software, engenharia da computação, ciência de dados, segurança digital e inteligência artificial.",link:"guia-carreira.html#tecnologia"},
+  exatas:{nome:"Ciências Exatas e Engenharias",cor:"#0a3d91",desc:"Engenharias, matemática, física e estatística combinam com seu raciocínio lógico e analítico.",link:"guia-carreira.html#exatas"},
+  biologicas:{nome:"Ciências Biológicas e Saúde",cor:"#16a34a",desc:"Medicina, enfermagem, biomedicina, biologia, veterinária e nutrição são áreas que combinam com você.",link:"guia-carreira.html#saude"},
+  humanas:{nome:"Ciências Humanas e Comunicação",cor:"#9333ea",desc:"Direito, jornalismo, letras, história, filosofia, pedagogia e comunicação social são fortes opções.",link:"guia-carreira.html#humanas"},
+  social:{nome:"Área Social e Educação",cor:"#0891b2",desc:"Psicologia, serviço social, pedagogia e profissões ligadas a cuidar e ensinar pessoas.",link:"guia-carreira.html#social"},
+  militar:{nome:"Carreira Militar e Segurança",cor:"#ff7a1a",desc:"Forças Armadas, polícia militar, bombeiros e demais carreiras de hierarquia, disciplina e serviço público.",link:"carreira-militar.html"},
+  artes:{nome:"Artes e Criatividade",cor:"#db2777",desc:"Design, arquitetura, audiovisual, música, teatro e demais áreas criativas combinam com você.",link:"guia-carreira.html#artes"},
+  negocios:{nome:"Negócios e Gestão",cor:"#ca8a04",desc:"Administração, economia, marketing, contabilidade e empreendedorismo são áreas alinhadas com seu perfil.",link:"guia-carreira.html#negocios"}
+};
+
+let atual=0, respostas=Array(PERGUNTAS.length).fill(null);
+
+function iniciarTeste(){
+  document.getElementById('intro').style.display='none';
+  document.getElementById('teste').style.display='block';
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function render(){
+  const p = PERGUNTAS[atual];
+  const opcoes = p.ops.map((o,i)=>`<div class="opcao ${respostas[atual]===i?'sel':''}" onclick="selecionar(${i})">${o[0]}</div>`).join('');
+  document.getElementById('questao').innerHTML = `
+    <h3>Pergunta ${atual+1} de ${PERGUNTAS.length}</h3>
+    <div class="pergunta">${p.q}</div>
+    <div class="opcoes">${opcoes}</div>`;
+  document.getElementById('bar').style.width = ((atual)/PERGUNTAS.length*100)+'%';
+  document.getElementById('btnPrev').style.visibility = atual===0?'hidden':'visible';
+  document.getElementById('btnNext').disabled = respostas[atual]===null;
+  document.getElementById('btnNext').textContent = atual===PERGUNTAS.length-1?'Ver resultado':'Próxima';
+}
+function selecionar(i){ respostas[atual]=i; render(); }
+function anterior(){ if(atual>0){atual--;render();} }
+function proxima(){
+  if(respostas[atual]===null) return;
+  if(atual<PERGUNTAS.length-1){atual++;render();} else { mostrarResultado(); }
+}
+function mostrarResultado(){
+  const score={};
+  Object.keys(AREAS).forEach(k=>score[k]=0);
+  respostas.forEach((r,i)=>{ if(r!==null) PERGUNTAS[i].ops[r][1].forEach(a=>score[a]++); });
+  const ord = Object.entries(score).sort((a,b)=>b[1]-a[1]);
+  const top = ord[0][0];
+  const max = ord[0][1] || 1;
+  const a = AREAS[top];
+  const barras = ord.slice(0,5).map(([k,v])=>{
+    const pct = Math.round(v/max*100);
+    return `<div class="barra-item"><div class="lbl"><span>${AREAS[k].nome}</span><span>${pct}%</span></div><div class="bg"><div class="fill" style="width:0%" data-w="${pct}%"></div></div></div>`;
+  }).join('');
+  document.getElementById('teste').style.display='none';
+  const res = document.getElementById('resultado');
+  res.style.display='block';
+  res.innerHTML = `
+    <div class="resultado">
+      <div class="destaque">Seu resultado</div>
+      <h2>${a.nome}</h2>
+      <p style="color:var(--muted);font-size:1.05rem;max-width:600px;margin:0 auto">${a.desc}</p>
+      <div class="barras">${barras}</div>
+      <a href="${a.link}" class="btn btn-primary">Ver carreiras dessa área</a>
+      <a href="oportunidades-emprego.html" class="btn btn-azul" style="margin-left:10px">Ver oportunidades</a>
+      <div style="margin-top:24px"><a href="javascript:location.reload()" style="color:var(--muted)">Refazer teste</a></div>
+    </div>`;
+  setTimeout(()=>{document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w);},100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+<footer id="contato">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4>Carreira Up</h4>
+        <p style="margin-bottom:14px">Plataforma criada em 2026 com o objetivo de unificar oportunidades de estudo e trabalho para jovens de escola pública e jovens em busca da primeira oportunidade de emprego, promovendo desenvolvimento pessoal e profissional.</p>
+        <p style="font-style:italic;color:#ffb78a">"Evoluindo a cada passo."</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <p><a href="index.html">Início</a></p>
+        <p><a href="teste-vocacional.html">Teste Vocacional</a></p>
+        <p><a href="guia-carreira.html">Guia de Carreira</a></p>
+        <p><a href="oportunidades-emprego.html">Oportunidades</a></p>
+        <p><a href="modelo-curriculo.html">Currículo</a></p>
+      </div>
+      <div>
+        <h4>Contatos</h4>
+        <div class="contact-item"><span class="contact-icon">@</span><a href="mailto:upcarreiraoficial@gmail.com.br">upcarreiraoficial@gmail.com.br</a></div>
+        <div class="contact-item"><span class="contact-icon">W</span><span>Atendimento online</span></div>
+        <div class="contact-item"><span class="contact-icon">BR</span><span>Brasil</span></div>
+      </div>
+    </div>
+    <div class="copy">© 2026 Carreira Up — Evoluindo a cada passo. Todos os direitos reservados.</div>
+  </div>
+</footer>
+</body></html>

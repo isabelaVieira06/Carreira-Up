@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guia Profissional — Carreira Up</title>
+<meta name="description" content="Carreira Up — Evoluindo a cada passo. Plataforma de orientação vocacional e profissional para jovens.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --azul:#0a3d91;--azul-claro:#2a6fdb;--azul-bg:#eaf2ff;
+  --laranja:#ff7a1a;--laranja-escuro:#e85d00;
+  --branco:#ffffff;--cinza:#f6f8fb;--texto:#1d2433;--muted:#5a6478;
+  --sombra:0 6px 24px rgba(10,61,145,.08);
+  --radius:14px;
+}
+html,body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--texto);background:var(--branco);line-height:1.55;scroll-behavior:smooth}
+a{color:var(--azul);text-decoration:none}
+a:hover{color:var(--laranja)}
+img{max-width:100%;display:block}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* Header */
+header.site{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5ebf5;box-shadow:0 2px 10px rgba(10,61,145,.04)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--azul);font-size:1.25rem}
+.brand .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--azul),var(--azul-claro));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;letter-spacing:.5px;box-shadow:var(--sombra)}
+.brand .logo span{font-size:1rem}
+.brand small{display:block;font-weight:500;color:var(--laranja);font-size:.78rem;letter-spacing:.5px}
+.menu-btn{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:10px;border-radius:10px}
+.menu-btn:hover{background:var(--azul-bg)}
+.menu-btn span{width:26px;height:3px;background:var(--azul);border-radius:2px;display:block;transition:.25s}
+.menu-btn.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* Drawer */
+.drawer{position:fixed;top:0;right:-360px;width:340px;max-width:90vw;height:100vh;background:#fff;box-shadow:-12px 0 30px rgba(10,61,145,.15);transition:right .3s ease;z-index:60;padding:90px 22px 30px;overflow-y:auto}
+.drawer.open{right:0}
+.drawer h3{color:var(--azul);font-size:.9rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;border-bottom:2px solid var(--laranja);padding-bottom:6px;display:inline-block}
+.drawer ul{list-style:none;margin-top:14px}
+.drawer li a{display:block;padding:14px 12px;border-radius:10px;color:var(--texto);font-weight:600;border-left:3px solid transparent;transition:.2s}
+.drawer li a:hover{background:var(--azul-bg);border-left-color:var(--laranja);color:var(--azul);transform:translateX(3px)}
+.overlay{position:fixed;inset:0;background:rgba(10,30,60,.45);opacity:0;pointer-events:none;transition:.3s;z-index:55}
+.overlay.show{opacity:1;pointer-events:auto}
+
+/* Hero */
+.hero{position:relative;background:linear-gradient(135deg,#0a3d91 0%,#2a6fdb 100%);color:#fff;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-100px;top:-80px;width:380px;height:380px;background:var(--laranja);opacity:.18;border-radius:50%}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:70px 0;position:relative;z-index:2}
+.hero h1{font-size:2.8rem;line-height:1.15;margin-bottom:18px;font-weight:800}
+.hero h1 em{font-style:normal;color:#ffd9b8;background:linear-gradient(transparent 60%,rgba(255,122,26,.55) 60%);padding:0 6px}
+.hero p.lead{font-size:1.15rem;opacity:.95;margin-bottom:28px;max-width:540px}
+.hero .img-wrap{border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);transform:rotate(2deg)}
+.hero .img-wrap img{aspect-ratio:4/3;object-fit:cover}
+.btn{display:inline-block;padding:14px 28px;border-radius:50px;font-weight:700;letter-spacing:.3px;border:0;cursor:pointer;transition:.25s;font-size:1rem}
+.btn-primary{background:var(--laranja);color:#fff;box-shadow:0 8px 22px rgba(255,122,26,.4)}
+.btn-primary:hover{background:var(--laranja-escuro);transform:translateY(-2px);color:#fff}
+.btn-outline{background:transparent;color:#fff;border:2px solid #fff;margin-left:10px}
+.btn-outline:hover{background:#fff;color:var(--azul)}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-azul:hover{background:var(--azul-claro);color:#fff}
+
+/* Sections */
+section.bloco{padding:70px 0}
+.section-title{text-align:center;margin-bottom:42px}
+.section-title small{color:var(--laranja);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.85rem}
+.section-title h2{font-size:2.1rem;color:var(--azul);margin-top:6px}
+.section-title p{color:var(--muted);max-width:680px;margin:14px auto 0}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra);border:1px solid #eef2f9;transition:.3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(10,61,145,.15)}
+.card .ph{height:170px;overflow:hidden;position:relative}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.card:hover .ph img{transform:scale(1.07)}
+.card .body{padding:22px;flex:1;display:flex;flex-direction:column}
+.card h3{color:var(--azul);font-size:1.2rem;margin-bottom:8px}
+.card p{color:var(--muted);flex:1;margin-bottom:16px}
+.card .tag{display:inline-block;background:var(--azul-bg);color:var(--azul);font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+
+/* Sobre */
+.sobre{background:var(--cinza)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.sobre img{border-radius:var(--radius);box-shadow:var(--sombra)}
+.sobre h2{color:var(--azul);font-size:2rem;margin-bottom:18px}
+.sobre p{color:var(--muted);margin-bottom:14px;font-size:1.05rem}
+
+/* Footer / contato */
+footer{background:#071f4d;color:#cfd9ee;padding:60px 0 24px;margin-top:0}
+footer h4{color:#fff;margin-bottom:16px;font-size:1.1rem;border-left:4px solid var(--laranja);padding-left:10px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer a{color:#cfd9ee}
+footer a:hover{color:var(--laranja)}
+.copy{border-top:1px solid #1c3a73;margin-top:36px;padding-top:18px;text-align:center;color:#8aa1cb;font-size:.9rem}
+.contact-item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.contact-icon{width:34px;height:34px;border-radius:50%;background:var(--laranja);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;flex-shrink:0}
+
+/* Page header (interno) */
+.page-hero{background:linear-gradient(135deg,#0a3d91,#2a6fdb);color:#fff;padding:60px 0;text-align:center}
+.page-hero h1{font-size:2.4rem;margin-bottom:10px}
+.page-hero p{opacity:.9;max-width:620px;margin:0 auto}
+.breadcrumb{padding:14px 0;background:var(--cinza);font-size:.9rem;color:var(--muted)}
+.breadcrumb a{color:var(--azul);font-weight:600}
+
+/* Conteúdo geral */
+.content{padding:60px 0}
+.content h2{color:var(--azul);margin:30px 0 14px;font-size:1.6rem}
+.content h3{color:var(--azul);margin:22px 0 10px;font-size:1.2rem}
+.content p,.content li{color:var(--texto);margin-bottom:10px}
+.content ul,.content ol{padding-left:22px;margin-bottom:14px}
+.box{background:var(--cinza);border-left:5px solid var(--laranja);padding:22px;border-radius:10px;margin:20px 0}
+.box-azul{background:var(--azul-bg);border-left-color:var(--azul)}
+
+/* Formulário */
+form.form{background:#fff;padding:30px;border-radius:var(--radius);box-shadow:var(--sombra);max-width:680px;margin:0 auto}
+.form-row{margin-bottom:18px}
+.form-row label{display:block;font-weight:600;color:var(--azul);margin-bottom:6px}
+.form-row input,.form-row textarea,.form-row select{width:100%;padding:12px 14px;border:2px solid #dde5f3;border-radius:10px;font-size:1rem;font-family:inherit;transition:.2s}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:0;border-color:var(--azul-claro);box-shadow:0 0 0 3px rgba(42,111,219,.15)}
+.form-row textarea{min-height:130px;resize:vertical}
+.stars{display:flex;gap:6px;font-size:2rem;cursor:pointer;color:#dde5f3}
+.stars span{transition:.2s}
+.stars span.on,.stars span:hover,.stars span:hover ~ span{} /* default left-to-right */
+.stars[data-mode="hover"] span{color:#dde5f3}
+
+/* Responsive */
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr;padding:50px 0}
+  .hero h1{font-size:2.1rem}
+  .sobre-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .page-hero h1{font-size:1.8rem}
+}
+
+/* Teste vocacional */
+.teste-wrap{max-width:780px;margin:0 auto}
+.progress{height:10px;background:#dde5f3;border-radius:20px;overflow:hidden;margin-bottom:24px}
+.progress .bar{height:100%;background:linear-gradient(90deg,var(--azul),var(--laranja));width:0;transition:.4s}
+.questao{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--sombra);border:1px solid #eef2f9}
+.questao h3{color:var(--azul);margin-bottom:6px;font-size:1.05rem;font-weight:600}
+.questao .pergunta{font-size:1.3rem;font-weight:700;color:var(--texto);margin:8px 0 22px}
+.opcoes{display:flex;flex-direction:column;gap:10px}
+.opcao{padding:14px 18px;border:2px solid #dde5f3;border-radius:12px;cursor:pointer;font-weight:500;transition:.2s;background:#fff}
+.opcao:hover{border-color:var(--azul-claro);background:var(--azul-bg);transform:translateX(4px)}
+.opcao.sel{border-color:var(--laranja);background:#fff5ec;color:var(--laranja-escuro);font-weight:700}
+.nav-teste{display:flex;justify-content:space-between;margin-top:20px}
+.nav-teste button{padding:12px 26px;border-radius:50px;border:0;cursor:pointer;font-weight:700}
+.btn-prev{background:#eef2f9;color:var(--azul)}
+.btn-next{background:var(--laranja);color:#fff}
+.btn-next:disabled{opacity:.4;cursor:not-allowed}
+.resultado{background:#fff;border-radius:var(--radius);padding:36px;box-shadow:var(--sombra);text-align:center}
+.resultado .destaque{display:inline-block;background:var(--laranja);color:#fff;padding:8px 22px;border-radius:50px;font-weight:700;margin-bottom:14px;letter-spacing:1px;text-transform:uppercase;font-size:.85rem}
+.resultado h2{color:var(--azul);font-size:2rem;margin-bottom:14px}
+.barras{margin:30px 0;text-align:left}
+.barra-item{margin-bottom:14px}
+.barra-item .lbl{display:flex;justify-content:space-between;font-weight:600;margin-bottom:4px;color:var(--texto)}
+.barra-item .bg{height:14px;background:#eef2f9;border-radius:20px;overflow:hidden}
+.barra-item .fill{height:100%;background:linear-gradient(90deg,var(--azul-claro),var(--laranja));border-radius:20px;transition:1s}
+
+/* Currículo */
+.cv-preview{background:#fff;padding:40px;border-radius:var(--radius);box-shadow:var(--sombra);margin-top:20px;font-family:Georgia,serif}
+.cv-preview h1{color:var(--azul);border-bottom:3px solid var(--laranja);padding-bottom:8px;margin-bottom:6px}
+.cv-preview h2{color:var(--azul);font-size:1.1rem;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #dde5f3;padding-bottom:4px;margin:22px 0 10px}
+.cv-meta{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+
+/* Util */
+.center{text-align:center}
+.mt-20{margin-top:20px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav">
+    <a href="index.html" class="brand">
+      <div class="logo"><span>CU</span></div>
+      <div>Carreira Up<small>Evoluindo a cada passo</small></div>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <h3>Navegação</h3>
+  <ul><li><a href="index.html">Início</a></li>
+<li><a href="teste-vocacional.html">Teste Vocacional</a></li>
+<li><a href="guia-carreira.html">Guia de Carreira</a></li>
+<li><a href="oportunidades-emprego.html">Oportunidades de Emprego</a></li>
+<li><a href="modelo-curriculo.html">Modelo de Currículo</a></li>
+<li><a href="carreira-militar.html">Ingresso Carreira Militar</a></li>
+<li><a href="guia-profissional.html" style="color:var(--laranja)">Guia Profissional</a></li>
+<li><a href="feedback.html">Feedback / Avaliação</a></li>
+<li><a href="contatos.html">Contatos</a></li></ul>
+</aside>
+<script>
+(function(){
+  var b=document.getElementById('menuBtn'),d=document.getElementById('drawer'),o=document.getElementById('overlay');
+  function tog(){b.classList.toggle('open');d.classList.toggle('open');o.classList.toggle('show');}
+  b.addEventListener('click',tog);o.addEventListener('click',tog);
+})();
+</script>
+
+
+<section class="page-hero"><div class="container"><h1>Guia Profissional</h1><p>Dicas, cursos gratuitos e práticas para evoluir profissionalmente desde já.</p></div></section>
+<div class="breadcrumb"><div class="container"><a href="index.html">Início</a> &raquo; Guia Profissional</div></div>
+<section class="content">
+  <div class="container">
+    <div class="grid-2"><div><img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=1200&q=80" alt="Mentoria profissional" style="border-radius:14px;box-shadow:var(--sombra)"></div>
+    <div>
+      <h2>Desenvolvimento começa hoje</h2>
+      <p>Não importa onde você está — o caminho profissional se constrói com pequenas atitudes diárias. Confira práticas, plataformas gratuitas e dicas de quem já passou por isso.</p>
+    </div></div>
+
+    <h2>Plataformas de cursos gratuitos</h2>
+    <div class="cards">
+      <div class="card"><div class="body"><span class="tag">Tecnologia</span><h3>Fundação Bradesco</h3><p>Centenas de cursos com certificado totalmente gratuitos.</p><a href="https://www.ev.org.br/" target="_blank" class="btn btn-azul">Acessar</a></div></div>
+      <div class="card"><div class="body"><span class="tag">Empreendedorismo</span><h3>SEBRAE</h3><p>Cursos sobre negócios, finanças e gestão.</p><a href="https://sebrae.com.br/" target="_blank" class="btn btn-azul">Acessar</a></div></div>
+      <div class="card"><div class="body"><span class="tag">Indústria</span><h3>SENAI</h3><p>Cursos técnicos e profissionalizantes.</p><a href="https://www.senai.br/" target="_blank" class="btn btn-azul">Acessar</a></div></div>
+      <div class="card"><div class="body"><span class="tag">Internacional</span><h3>Coursera</h3><p>Cursos de universidades top do mundo (muitos gratuitos).</p><a href="https://www.coursera.org/" target="_blank" class="btn btn-azul">Acessar</a></div></div>
+      <div class="card"><div class="body"><span class="tag">Idiomas</span><h3>Duolingo</h3><p>App gratuito para aprender inglês, espanhol e mais.</p><a href="https://www.duolingo.com/" target="_blank" class="btn btn-azul">Acessar</a></div></div>
+      <div class="card"><div class="body"><span class="tag">Diversos</span><h3>Escola Virtual Gov</h3><p>Cursos da ENAP — administração pública e habilidades gerais.</p><a href="https://www.escolavirtual.gov.br/" target="_blank" class="btn btn-azul">Acessar</a></div></div>
+    </div>
+
+    <h2>Habilidades essenciais para o mercado</h2>
+    <div class="box">
+      <ul>
+        <li><strong>Comunicação:</strong> escrever bem e se expressar com clareza.</li>
+        <li><strong>Inglês:</strong> dobra suas oportunidades em qualquer área.</li>
+        <li><strong>Pacote Office / Google Workspace:</strong> Word, Excel, PowerPoint, Docs, Planilhas.</li>
+        <li><strong>Trabalho em equipe:</strong> saber colaborar é diferencial em qualquer profissão.</li>
+        <li><strong>Pensamento crítico e proatividade:</strong> resolver problemas sem esperar ordem.</li>
+        <li><strong>Letramento digital:</strong> usar bem ferramentas online, IA e redes profissionais.</li>
+      </ul>
+    </div>
+
+    <h2>Dicas para a primeira entrevista</h2>
+    <div class="box box-azul">
+      <ol>
+        <li>Pesquise sobre a empresa antes da entrevista.</li>
+        <li>Vista-se de forma adequada e chegue 10 minutos antes.</li>
+        <li>Leve o currículo impresso e documentos.</li>
+        <li>Olhe nos olhos e mantenha boa postura.</li>
+        <li>Não minta — fale com sinceridade sobre suas experiências.</li>
+        <li>Faça perguntas inteligentes ao final.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4>Carreira Up</h4>
+        <p style="margin-bottom:14px">Plataforma criada em 2026 com o objetivo de unificar oportunidades de estudo e trabalho para jovens de escola pública e jovens em busca da primeira oportunidade de emprego, promovendo desenvolvimento pessoal e profissional.</p>
+        <p style="font-style:italic;color:#ffb78a">"Evoluindo a cada passo."</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <p><a href="index.html">Início</a></p>
+        <p><a href="teste-vocacional.html">Teste Vocacional</a></p>
+        <p><a href="guia-carreira.html">Guia de Carreira</a></p>
+        <p><a href="oportunidades-emprego.html">Oportunidades</a></p>
+        <p><a href="modelo-curriculo.html">Currículo</a></p>
+      </div>
+      <div>
+        <h4>Contatos</h4>
+        <div class="contact-item"><span class="contact-icon">@</span><a href="mailto:upcarreiraoficial@gmail.com.br">upcarreiraoficial@gmail.com.br</a></div>
+        <div class="contact-item"><span class="contact-icon">W</span><span>Atendimento online</span></div>
+        <div class="contact-item"><span class="contact-icon">BR</span><span>Brasil</span></div>
+      </div>
+    </div>
+    <div class="copy">© 2026 Carreira Up — Evoluindo a cada passo. Todos os direitos reservados.</div>
+  </div>
+</footer>
+</body></html>
